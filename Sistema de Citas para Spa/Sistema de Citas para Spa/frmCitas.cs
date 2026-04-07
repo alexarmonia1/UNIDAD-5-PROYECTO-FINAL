@@ -40,9 +40,23 @@ namespace Sistema_de_Citas_para_Spa
             }
         }
 
+       
+
         private void frmCitas_Load(object sender, EventArgs e)
         {
             CargarCitas();
+           
+        }
+
+        private void cmbPaciente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnInsertar_Click(object sender, EventArgs e)
+        {
+           
+
         }
     } 
 }

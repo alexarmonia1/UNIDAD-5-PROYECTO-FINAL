@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="agencia_toursModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Destinos">
+          <Key>
+            <PropertyRef Name="DestinoId" />
+          </Key>
+          <Property Name="DestinoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaisId" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DuracionDias" Type="int" Nullable="false" />
+          <Property Name="DuracionHoras" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Paises">
+          <Key>
+            <PropertyRef Name="PaisId" />
+          </Key>
+          <Property Name="PaisId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tours">
+          <Key>
+            <PropertyRef Name="TourId" />
+          </Key>
+          <Property Name="TourId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PaisId" Type="int" Nullable="false" />
+          <Property Name="DestinoId" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Hora" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Precio" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="DuracionDias" Type="int" Nullable="false" />
+          <Property Name="DuracionHoras" Type="int" Nullable="false" />
+          <Property Name="ITBIS" Type="numeric" Precision="13" Scale="4" StoreGeneratedPattern="Computed" />
+          <Property Name="FechaHoraFin" Type="datetime" StoreGeneratedPattern="Computed" />
+          <Property Name="Estado" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Destinos__PaisId__4CA06362">
+          <End Role="Paises" Type="Self.Paises" Multiplicity="1" />
+          <End Role="Destinos" Type="Self.Destinos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paises">
+              <PropertyRef Name="PaisId" />
+            </Principal>
+            <Dependent Role="Destinos">
+              <PropertyRef Name="PaisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tours__DestinoId__534D60F1">
+          <End Role="Destinos" Type="Self.Destinos" Multiplicity="1" />
+          <End Role="Tours" Type="Self.Tours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Destinos">
+              <PropertyRef Name="DestinoId" />
+            </Principal>
+            <Dependent Role="Tours">
+              <PropertyRef Name="DestinoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tours__PaisId__52593CB8">
+          <End Role="Paises" Type="Self.Paises" Multiplicity="1" />
+          <End Role="Tours" Type="Self.Tours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paises">
+              <PropertyRef Name="PaisId" />
+            </Principal>
+            <Dependent Role="Tours">
+              <PropertyRef Name="PaisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="agencia_toursModelStoreContainer">
+          <EntitySet Name="Destinos" EntityType="Self.Destinos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tours" EntityType="Self.Tours" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Destinos__PaisId__4CA06362" Association="Self.FK__Destinos__PaisId__4CA06362">
+            <End Role="Paises" EntitySet="Paises" />
+            <End Role="Destinos" EntitySet="Destinos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tours__DestinoId__534D60F1" Association="Self.FK__Tours__DestinoId__534D60F1">
+            <End Role="Destinos" EntitySet="Destinos" />
+            <End Role="Tours" EntitySet="Tours" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tours__PaisId__52593CB8" Association="Self.FK__Tours__PaisId__52593CB8">
+            <End Role="Paises" EntitySet="Paises" />
+            <End Role="Tours" EntitySet="Tours" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="agencia_toursModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Destinos">
+          <Key>
+            <PropertyRef Name="DestinoId" />
+          </Key>
+          <Property Name="DestinoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaisId" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DuracionDias" Type="Int32" Nullable="false" />
+          <Property Name="DuracionHoras" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Paises" Relationship="Self.FK__Destinos__PaisId__4CA06362" FromRole="Destinos" ToRole="Paises" />
+          <NavigationProperty Name="Tours" Relationship="Self.FK__Tours__DestinoId__534D60F1" FromRole="Destinos" ToRole="Tours" />
+        </EntityType>
+        <EntityType Name="Paises">
+          <Key>
+            <PropertyRef Name="PaisId" />
+          </Key>
+          <Property Name="PaisId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Destinos" Relationship="Self.FK__Destinos__PaisId__4CA06362" FromRole="Paises" ToRole="Destinos" />
+          <NavigationProperty Name="Tours" Relationship="Self.FK__Tours__PaisId__52593CB8" FromRole="Paises" ToRole="Tours" />
+        </EntityType>
+        <EntityType Name="Tours">
+          <Key>
+            <PropertyRef Name="TourId" />
+          </Key>
+          <Property Name="TourId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PaisId" Type="Int32" Nullable="false" />
+          <Property Name="DestinoId" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Hora" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="DuracionDias" Type="Int32" Nullable="false" />
+          <Property Name="DuracionHoras" Type="Int32" Nullable="false" />
+          <Property Name="ITBIS" Type="Decimal" Precision="13" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="FechaHoraFin" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="3" />
+          <Property Name="Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Destinos" Relationship="Self.FK__Tours__DestinoId__534D60F1" FromRole="Tours" ToRole="Destinos" />
+          <NavigationProperty Name="Paises" Relationship="Self.FK__Tours__PaisId__52593CB8" FromRole="Tours" ToRole="Paises" />
+        </EntityType>
+        <Association Name="FK__Destinos__PaisId__4CA06362">
+          <End Role="Paises" Type="Self.Paises" Multiplicity="1" />
+          <End Role="Destinos" Type="Self.Destinos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paises">
+              <PropertyRef Name="PaisId" />
+            </Principal>
+            <Dependent Role="Destinos">
+              <PropertyRef Name="PaisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tours__DestinoId__534D60F1">
+          <End Role="Destinos" Type="Self.Destinos" Multiplicity="1" />
+          <End Role="Tours" Type="Self.Tours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Destinos">
+              <PropertyRef Name="DestinoId" />
+            </Principal>
+            <Dependent Role="Tours">
+              <PropertyRef Name="DestinoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tours__PaisId__52593CB8">
+          <End Role="Paises" Type="Self.Paises" Multiplicity="1" />
+          <End Role="Tours" Type="Self.Tours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paises">
+              <PropertyRef Name="PaisId" />
+            </Principal>
+            <Dependent Role="Tours">
+              <PropertyRef Name="PaisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="toursEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Destinos" EntityType="Self.Destinos" />
+          <EntitySet Name="Paises" EntityType="Self.Paises" />
+          <EntitySet Name="Tours" EntityType="Self.Tours" />
+          <AssociationSet Name="FK__Destinos__PaisId__4CA06362" Association="Self.FK__Destinos__PaisId__4CA06362">
+            <End Role="Paises" EntitySet="Paises" />
+            <End Role="Destinos" EntitySet="Destinos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tours__DestinoId__534D60F1" Association="Self.FK__Tours__DestinoId__534D60F1">
+            <End Role="Destinos" EntitySet="Destinos" />
+            <End Role="Tours" EntitySet="Tours" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tours__PaisId__52593CB8" Association="Self.FK__Tours__PaisId__52593CB8">
+            <End Role="Paises" EntitySet="Paises" />
+            <End Role="Tours" EntitySet="Tours" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="agencia_toursModelStoreContainer" CdmEntityContainer="toursEntities">
+          <EntitySetMapping Name="Destinos">
+            <EntityTypeMapping TypeName="agencia_toursModel.Destinos">
+              <MappingFragment StoreEntitySet="Destinos">
+                <ScalarProperty Name="DestinoId" ColumnName="DestinoId" />
+                <ScalarProperty Name="PaisId" ColumnName="PaisId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="DuracionDias" ColumnName="DuracionDias" />
+                <ScalarProperty Name="DuracionHoras" ColumnName="DuracionHoras" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paises">
+            <EntityTypeMapping TypeName="agencia_toursModel.Paises">
+              <MappingFragment StoreEntitySet="Paises">
+                <ScalarProperty Name="PaisId" ColumnName="PaisId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tours">
+            <EntityTypeMapping TypeName="agencia_toursModel.Tours">
+              <MappingFragment StoreEntitySet="Tours">
+                <ScalarProperty Name="TourId" ColumnName="TourId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="PaisId" ColumnName="PaisId" />
+                <ScalarProperty Name="DestinoId" ColumnName="DestinoId" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Hora" ColumnName="Hora" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="DuracionDias" ColumnName="DuracionDias" />
+                <ScalarProperty Name="DuracionHoras" ColumnName="DuracionHoras" />
+                <ScalarProperty Name="ITBIS" ColumnName="ITBIS" />
+                <ScalarProperty Name="FechaHoraFin" ColumnName="FechaHoraFin" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

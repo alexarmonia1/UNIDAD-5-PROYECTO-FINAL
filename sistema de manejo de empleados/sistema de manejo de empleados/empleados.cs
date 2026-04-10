@@ -63,6 +63,31 @@ namespace sistema_de_manejo_de_empleados
         private void empleados_Load(object sender, EventArgs e)
         {
             cargarEmpleados();
+
+            numSalario.Minimum = 0;              // valor mínimo
+            numSalario.Maximum = 1000000;        // valor máximo (ajústalo según tus necesidades)
+            numSalario.DecimalPlaces = 2;        // para mostrar decimales
+            numSalario.Increment = 100;          // paso de incremento
+
+            using (var db = new empleadosEntities())
+            {
+                cmbDepartamentos.DataSource = db.Departamentos.ToList();
+                cmbDepartamentos.DisplayMember = "Nombre";
+                cmbDepartamentos.ValueMember = "DepartamentoId";
+
+                cmbCargos.DataSource = db.Cargos.ToList();
+                cmbCargos.DisplayMember = "Nombre";
+                cmbCargos.ValueMember = "CargoId";
+
+                cmbEstado.Items.Clear();
+                cmbEstado.Items.Add("Vigente");
+                cmbEstado.Items.Add("No Vigente");
+            }
+
+            // Cargar empleados en el DataGridView
+            cargarEmpleados();
+
+
         }
 
         private void btnInsertar_Click(object sender, EventArgs e)
@@ -114,7 +139,7 @@ namespace sistema_de_manejo_de_empleados
                 cmbDepartamentos.Text = dgvEmpleados.CurrentRow.Cells["Departamento"].Value.ToString();
                 cmbCargos.Text = dgvEmpleados.CurrentRow.Cells["Cargo"].Value.ToString();
                 dtpFechaInicio.Value = Convert.ToDateTime(dgvEmpleados.CurrentRow.Cells["FechaInicio"].Value);
-                numSalario.Value = Convert.ToDecimal(dgvEmpleados.CurrentRow.Cells["Salario"].Value);
+                decimal salario = Convert.ToDecimal(dgvEmpleados.CurrentRow.Cells["Salario"].Value);
                 cmbEstado.Text = dgvEmpleados.CurrentRow.Cells["Estado"].Value.ToString();
             }
 

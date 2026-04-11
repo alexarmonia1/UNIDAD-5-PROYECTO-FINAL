@@ -16,5 +16,23 @@ namespace Agencia_de_Tours
         {
             InitializeComponent();
         }
+
+        private void destinoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmPaises frmPaises = new frmPaises();
+            frmPaises.ShowDialog();
+        }
+
+        private void pToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDestinos destinos = new frmDestinos();
+            destinos.ShowDialog();
+        }
+
+        private void toursToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmTours tours = new frmTours();
+            tours.ShowDialog();
+        }
     }
 }

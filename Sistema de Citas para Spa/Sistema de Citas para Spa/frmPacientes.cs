@@ -105,6 +105,7 @@ namespace Sistema_de_Citas_para_Spa
 
                 MessageBox.Show("Paciente agregado correctamente.");
                 cargarPacientes(); 
+                limpiarCampos() ;
             }
             catch (Exception ex)
             {
@@ -147,6 +148,7 @@ namespace Sistema_de_Citas_para_Spa
 
                         db.SaveChanges();
                         MessageBox.Show("Paciente actualizado correctamente.");
+                        limpiarCampos();
                         
                     }
                     else
